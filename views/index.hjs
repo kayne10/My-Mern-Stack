@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+     <!-- Root DOM element -->
+    <div id="root"></div>
+
+
+    <!-- Import bundle.js  -->
+    <script type="text/javascript" src="/build/bundle.js"></script>
+  </body>
+</html>
