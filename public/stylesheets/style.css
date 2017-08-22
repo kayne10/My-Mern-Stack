@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* css class called detail */
+.detail {
+  font: 12px;
+  color: #777;
+}

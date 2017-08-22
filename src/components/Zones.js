@@ -4,6 +4,7 @@ import Zone from './Zone'
 class Zones extends Component {
   constructor(){
     super()
+    //defining the state
     this.state = {
       list: [
         {name:'Zone 1', zipCode:'10012', numComments:10},
@@ -20,7 +21,7 @@ class Zones extends Component {
 
     const listItems = this.state.list.map((zone, i) => {
       return (
-        <li><Zone zone={zone} /></li>
+        <li><Zone zone={zone} /></li> // {zone} is the prop from
       )
     })
 
@@ -35,5 +36,5 @@ class Zones extends Component {
 }
 
 
-// Export Component
+// es6 Export Component
 export default Zones
