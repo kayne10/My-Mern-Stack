@@ -2,7 +2,7 @@
 // es6 equivalent to var React = require('react')
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import Home from './components/Home'
+import Home from './components/layout/Home'
 
 class App extends Component {
 
