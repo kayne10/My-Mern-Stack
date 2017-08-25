@@ -10,13 +10,10 @@ class Comments extends Component {
     this.state = {
       comment: {
         username: '',
-        body: ''
+        body: '',
+        timestamp: ''
       },
-      list: [
-        {body: 'comment 1', username: 'dtrump', timestamp:'10:30'},
-        {body: 'comment 2', username: 'hclinton', timestamp:'10:40'},
-        {body: 'comment 3', username: 'bsanders', timestamp:'10:45'}
-      ]
+      list: []
     }
   }
 
@@ -52,6 +49,16 @@ class Comments extends Component {
     })
   }
 
+  updateTime(event){
+    console.log('updateTime: '+ event.target.value)
+    let updatedComment = Object.assign({}, this.state.comment)
+    updatedComment['timestamp'] = event.target.value
+    //change state
+    this.setState({
+      comment: updatedComment
+    })
+  }
+
   render(){
     const commentList = this.state.list.map((comment, i) => {
       return (
@@ -70,6 +77,7 @@ class Comments extends Component {
 
           <input onChange={this.updateUsername.bind(this)} className="form-control"type="text" placeholder="Username" /><br />
           <input onChange={this.updateBody.bind(this)} className="form-control"type="text" placeholder="Comment" /><br />
+          <input onChange={this.updateTime.bind(this)} className="form-control"type="text" placeholder="Time" /><br />
           <button onClick={this.submitComment.bind(this)} className="btn btn-info">Submit Comment</button>
 
         </div>
