@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Zone from '../presentation/Zone'
 import superagent from 'superagent'
+import { APIManager } from '../../utils'
+
 
 class Zones extends Component {
   constructor(){
@@ -18,23 +20,17 @@ class Zones extends Component {
   //function gets called prior to component. Grabs data from REST API
   componentDidMount(){
     console.log('componentDidMount: ');
-    superagent
-      .get('/api/zone')
-      .query(null)
-      .set('Accept', 'application/json')
-      .end((err, response) => {
-
-        if (err) {
-          alert('ERROR: '+err)
-          return
-        }
-
-        console.log(JSON.stringify(response.body));
-        let results = response.body.results
-        this.setState({
-          list: results
-        })
+    APIManager.get('/api/zone', null, (err, response) => {
+      if (err) {
+        alert('ERROR: '+err.message)
+        return
+      }
+      console.log('RESULTS: '+JSON.stringify(response.results));
+      this.setState({
+        list: response.results
       })
+    })
+
   }
 
   //copy the state
