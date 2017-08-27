@@ -22,13 +22,15 @@ module.exports = {
   },
 
   create: function(params, callback){
-    var zips = params['zipCodes']
-    var zip = zips.split(',') //splits each input with a comma delimeter
-    var newZips = []
-    zip.forEach(function(zipCode){
-      newZips.push(zipCode.trim())
-    })
-    params['zipCodes'] = newZips
+    // var zips = params['zipCodes']
+    // var zip = zips.split(',') //splits each input with a comma delimeter
+    // var newZips = []
+    // zip.forEach(function(zipCode){
+    //   newZips.push(zipCode.trim())
+    // })
+    // params['zipCodes'] = newZips
+
+
     Zone.create(params, function(err, zone){
       if (err) {
         callback(err, null)
@@ -47,7 +49,7 @@ module.exports = {
       callback(null, zone)
     })
   },
-  
+
   delete: function(){
     Zone.findByIdAndRemove(id, function(err){
       if (err) {
