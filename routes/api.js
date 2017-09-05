@@ -1,7 +1,8 @@
 var express = require('express')
 var router = express.Router()
-var ZoneController = require('../controllers/ZoneController')
 var controllers = require('../controllers/index')
+var passport = require('passport');
+
 
 router.get('/:resource', function(req, res, next) {
 
@@ -17,19 +18,33 @@ router.get('/:resource', function(req, res, next) {
 
   }
 
-  controller.find(req.query, function(err, results){
-    if (err) {
+  controller
+    .find(req.query)
+    .then(function(entities){
+      res.json({
+        confirmation: 'SUCCESS',
+        results: entities
+      })
+    })
+    .catch(function(err){
       res.json({
         confirmation: 'fail',
         message: err
       })
-      return
-    }
-    res.json({
-      confirmation: 'success',
-      results: results
     })
-  })
+  // controller.find(req.query, function(err, results){
+  //   if (err) {
+  //     res.json({
+  //       confirmation: 'fail',
+  //       message: err
+  //     })
+  //     return
+  //   }
+  //   res.json({
+  //     confirmation: 'success',
+  //     results: results
+  //   })
+  // })
 });
 
 router.get('/:resource/:id', function(req, res, next){
@@ -47,19 +62,34 @@ router.get('/:resource/:id', function(req, res, next){
 
   }
 
-  controller.findById(id, function(err, result){
-    if (err) {
-      res.json({
-        confirmation: 'fail',
-        message: 'Not Found'
-      })
-      return
-    }
+
+  controller.findById(id)
+  .then(function(result){
     res.json({
       confirmation: 'success',
       result: result
     })
   })
+  .catch(function(err){
+    res.json({
+      confirmation: 'fail',
+      message: err
+    })
+  })
+
+  // controller.findById(id, function(err, result){
+  //   if (err) {
+  //     res.json({
+  //       confirmation: 'fail',
+  //       message: 'Not Found'
+  //     })
+  //     return
+  //   }
+  //   res.json({
+  //     confirmation: 'success',
+  //     result: result
+  //   })
+  // })
 })
 
 router.post('/:resource/', function(req, res, next){
@@ -74,21 +104,49 @@ router.post('/:resource/', function(req, res, next){
 
   }
 
-  controller.create(req.body, function(err, result){
-    if (err) {
-      res.json({
-        confirmation: 'fail',
-        message: err
-      })
-      return
-    }
+  controller.create(req.body)
+  .then(function(result){
     res.json({
       confirmation: 'success',
       result: result
     })
   })
+  .catch(function(err){
+    res.json({
+      confirmation: 'fail',
+      message: err
+    })
+  })
+
+  // controller.create(req.body, function(err, result){
+  //   if (err) {
+  //     res.json({
+  //       confirmation: 'fail',
+  //       message: err
+  //     })
+  //     return
+  //   }
+  //   res.json({
+  //     confirmation: 'success',
+  //     result: result
+  //   })
+  // })
 })
 
+
+// router.post('/:register', function(req, res, next){
+//   passport.authenticate('local.signup', {failureFlash: true}, function(err, user, info) {
+//     if (err) { return next(err); }
+//     // Redirect if it fails
+//     if (!user) { return res.redirect('/signup'); }
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+//       // Redirect if it succeeds
+//       req.flash('success','Welcome, Lets get started!');
+//       return res.redirect('/api/dashboard');
+//     });
+//  })(req, res, next);
+// });
 
 
 

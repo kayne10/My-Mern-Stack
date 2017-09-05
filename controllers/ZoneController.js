@@ -1,27 +1,32 @@
 var Zone = require('../models/Zone')
+var Promise = require('bluebird')
 
 module.exports = {
-  find: function(params, callback){
-    Zone.find(params, function(err, zones){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, zones)
+  find: function(params){
+    return new Promise(function(resolve, reject){
+      Zone.find(params, function(err, zones){
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(zones)
+      })
     })
   },
 
-  findById: function(id, callback){
-    Zone.findById(id, function(err, zone){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, zone)
+  findById: function(id){
+    return new Promise(function(resolve, reject){
+      Zone.findById(id, function(err, zone){
+        if(err){
+          reject(err)
+          return
+        }
+        resolve(zone)
+      })
     })
   },
 
-  create: function(params, callback){
+  create: function(params){
     // var zips = params['zipCodes']
     // var zip = zips.split(',') //splits each input with a comma delimeter
     // var newZips = []
@@ -31,12 +36,14 @@ module.exports = {
     // params['zipCodes'] = newZips
 
 
-    Zone.create(params, function(err, zone){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, zone)
+    return new Promise(function(resolve, reject){
+      Zone.create(params, function(err, zone){
+        if(err){
+          reject(err)
+          return
+        }
+        resolve(zone)
+      })
     })
   },
 

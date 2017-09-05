@@ -1,33 +1,40 @@
 var Comment = require('../models/Comment')
+var Promise = require('bluebird')
 
 module.exports = {
-  find: function(params, callback){
-    Comment.find(params, function(err, comments){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, comments)
+  find: function(params){
+    return new Promise(function(resolve, reject){
+      Comment.find(params, function(err, comments){
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(comments)
+      })
     })
   },
 
-  findById: function(id, callback){
-    Comment.findById(id, function(err, comment){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, comment)
+  findById: function(id){
+    return new Promise(function(resolve, reject){
+      Comment.findById(id, function(err, comment){
+        if(err){
+          reject(err)
+          return
+        }
+        resolve(comment)
+      })
     })
   },
   // change this for post state to work!!!
-  create: function(params, callback){
-    Comment.create(params, function(err, comment){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, comment)
+  create: function(params){
+    return new Promise(function(resolve, reject){
+      Comment.create(params, function(err, comment){
+        if(err){
+          reject(err)
+          return
+        }
+        resolve(comment)
+      })
     })
   },
 

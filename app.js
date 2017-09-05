@@ -5,8 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var config = require('./config/main');
 
-var dbUrl = 'mongodb://localhost/mern-app'
+var dbUrl = config.database
 
 // Use native Node promises
 mongoose.Promise = global.Promise;
@@ -19,6 +20,7 @@ mongoose.connect(dbUrl, function(err, res){
     console.log('DB CONNECTION SUCCESS: '+dbUrl);
   }
 })
+
 
 var routes = require('./routes/index');
 var api = require('./routes/api');

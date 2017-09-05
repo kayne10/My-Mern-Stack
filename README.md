@@ -30,6 +30,12 @@ Sub component data is always saved with Redux
 State values are constantly sent to reducers
 Every time data is fetched from a component it is packaged into an action
 
+<h3>Express</h3>
+<p>
+  Express allows our app to be stateless, which is ideal when making an API.
+</p>
+
+
 <h3>More on MERN</h3>
 <p>
   Mongoose is the Mongo library.
