@@ -2,11 +2,15 @@ var Zone = require('../models/Zone')
 var Promise = require('bluebird')
 
 module.exports = {
-  find: function(params){
+  find: function(params, isRaw){
     return new Promise(function(resolve, reject){
       Zone.find(params, function(err, zones){
         if (err) {
           reject(err)
+          return
+        }
+        if (isRaw){
+          resolve(zones)
           return
         }
         resolve(zones)

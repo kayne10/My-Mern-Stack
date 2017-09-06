@@ -19,7 +19,7 @@ router.get('/:resource', function(req, res, next) {
   }
 
   controller
-    .find(req.query)
+    .find(req.query, false)
     .then(function(entities){
       res.json({
         confirmation: 'SUCCESS',
@@ -117,37 +117,7 @@ router.post('/:resource/', function(req, res, next){
       message: err
     })
   })
-
-  // controller.create(req.body, function(err, result){
-  //   if (err) {
-  //     res.json({
-  //       confirmation: 'fail',
-  //       message: err
-  //     })
-  //     return
-  //   }
-  //   res.json({
-  //     confirmation: 'success',
-  //     result: result
-  //   })
-  // })
 })
-
-
-// router.post('/:register', function(req, res, next){
-//   passport.authenticate('local.signup', {failureFlash: true}, function(err, user, info) {
-//     if (err) { return next(err); }
-//     // Redirect if it fails
-//     if (!user) { return res.redirect('/signup'); }
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       // Redirect if it succeeds
-//       req.flash('success','Welcome, Lets get started!');
-//       return res.redirect('/api/dashboard');
-//     });
-//  })(req, res, next);
-// });
-
 
 
 module.exports = router;

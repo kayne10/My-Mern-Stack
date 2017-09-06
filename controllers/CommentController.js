@@ -2,11 +2,15 @@ var Comment = require('../models/Comment')
 var Promise = require('bluebird')
 
 module.exports = {
-  find: function(params){
+  find: function(params, isRaw){
     return new Promise(function(resolve, reject){
       Comment.find(params, function(err, comments){
         if (err) {
           reject(err)
+          return
+        }
+        if (isRaw) {
+          resolve(comments)
           return
         }
         resolve(comments)
