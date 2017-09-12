@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 var config = require('./config/main');
+
 
 var dbUrl = config.database
 
@@ -38,6 +40,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
+
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./middlewares/authenticate');
+app.use('/api', authCheckMiddleware);
+
+// load passport strategies
+const localSignupStrategy = require('./config/passport/local-signup');
+const localLoginStrategy = require('./config/passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

@@ -6,9 +6,8 @@
   </head>
   <body>
     <h1>Create Profile</h1>
-    <form class="" action="/api/profile" method="post">
-      <input type="text" name="firstName" placeholder="First Name" /><br />
-      <input type="text" name="lastName" placeholder="Last Name" /><br />
+    <form class="" action="/account/signup" method="post">
+      <input type="text" id="name" name="name" placeholder="Name" /><br />
       <input type="text" id="email" name="email" placeholder="email" /><br />
       <input type="password" id="password" name="password" placeholder="password" /><br />
   		<button type="submit" class="btn btn-warning btn-lg">Signup</button>

@@ -1,38 +1,33 @@
-//es6
-import jwt from 'jsonwebtoken';
-import config from '../config/main';
-import Profile from '../models/Profile';
+const jwt = require('jsonwebtoken');
+const Profile = '../models/Profile'
+const config = require('../config/main');
 
-export default (req, res, next) => {
-  const authorizationHeader = req.headers['authorization'];
-  let token;
 
-  if (authorizationHeader) {
-    token = authorizationHeader.split(' ')[1];
+/**
+ *  The Auth Checker middleware function.
+ */
+module.exports = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).end();
   }
 
-  if (token) {
-    jwt.verify(token, config.secret, (err, decoded) => {
-      if (err) {
-        res.status(401).json({ error: 'Failed to authenticate' });
-      } else {
-        User.query({
-          where: { id: decoded.id },
-          select: [ 'email', 'id', 'username' ]
-        }).fetch().then(user => {
-          if (!user) {
-            res.status(404).json({ error: 'No such user' });
-          } else {
-            req.currentUser = user;
-            next();
-          }
+  // get the last part from a authorization header string like "bearer token-value"
+  const token = req.headers.authorization.split(' ')[1];
 
-        });
+  // decode the token using a secret key-phrase
+  return jwt.verify(token, config.jwtSecret, (err, decoded) => {
+    // the 401 code is for unauthorized status
+    if (err) { return res.status(401).end(); }
+
+    const userId = decoded.sub;
+
+    // check if a user exists
+    return Profile.findById(userId, (userErr, user) => {
+      if (userErr || !user) {
+        return res.status(401).end();
       }
+
+      return next();
     });
-  } else {
-    res.status(403).json({
-      error: 'No token provided'
-    });
-  }
-}
+  });
+};

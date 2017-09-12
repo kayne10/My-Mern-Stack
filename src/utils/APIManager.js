@@ -7,7 +7,7 @@ import superagent from 'superagent'
 //Manages requests and responses from our server API
 export default {
 
-  get: (url, params, callback) => {
+  get: (url, params) => {
     superagent
       .get(url)
       .query(params)
@@ -26,7 +26,7 @@ export default {
       })
   },
 
-  post: (url, body, callback) => {
+  post: (url, body) => {
     superagent
       .post(url)
       .send(body)

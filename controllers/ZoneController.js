@@ -3,7 +3,8 @@ var Promise = require('bluebird')
 
 module.exports = {
   find: function(params, isRaw){
-    return new Promise(function(resolve, reject){
+    // pass in callback instead of function?
+    let callback = new Promise(function(resolve, reject) {
       Zone.find(params, function(err, zones){
         if (err) {
           reject(err)
@@ -15,7 +16,8 @@ module.exports = {
         }
         resolve(zones)
       })
-    })
+    });
+    return callback
   },
 
   findById: function(id){

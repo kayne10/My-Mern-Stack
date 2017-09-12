@@ -4,6 +4,12 @@ var controllers = require('../controllers/index')
 var passport = require('passport');
 
 
+router.get('/dashboard', (req, res) => {
+  res.status(200).json({
+    message: "You're authorized to see this secret message."
+  });
+});
+
 router.get('/:resource', function(req, res, next) {
 
   var resource = req.params.resource

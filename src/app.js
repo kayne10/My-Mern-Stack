@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Home from './components/layout/Home'
+import Dashboard from './components/layout/DashboardPage'
+import routes from './routes.js';
 
 class App extends Component {
 
@@ -10,8 +12,8 @@ class App extends Component {
   render(){
     return (
       <div>
-        Welcome to my MERN Stack!
         <Home />
+        <Dashboard />
       </div>
     )
   }
@@ -19,3 +21,5 @@ class App extends Component {
 
 //Inside the DOM, find the id tag called root and run all the react code
 ReactDOM.render(<App />, document.getElementById('root'))
+
+export default App
