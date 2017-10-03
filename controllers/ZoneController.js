@@ -63,7 +63,7 @@ module.exports = {
     })
   },
 
-  delete: function(){
+  delete: function(id){
     Zone.findByIdAndRemove(id, function(err){
       if (err) {
         callback(err, null)

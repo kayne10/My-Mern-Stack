@@ -1,7 +1,6 @@
 var express = require('express')
 var router = express.Router()
 var controllers = require('../controllers/')
-var checkAuth = require('../middlewares/authenticate')
 
 const validator = require('validator');
 const passport = require('passport');
@@ -141,7 +140,7 @@ router.post('/login', (req, res, next) => {
       });
     }
 
-
+    //success
     return res.json({
       success: true,
       message: 'You have successfully logged in!',

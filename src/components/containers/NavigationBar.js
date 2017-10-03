@@ -20,8 +20,6 @@ class NavigationBar extends Component {
           <div className="navbar-right">
             <Link to="/login">Log in</Link>
             <Link to="/signup">Sign up</Link>
-          </div>
-          <div className="navbar-right">
             <Link to="/logout">Log out</Link>
           </div>
         </div>

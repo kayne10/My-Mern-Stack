@@ -21,7 +21,7 @@ class Comments extends Component {
   componentDidMount(){
     APIManager.get('/api/comment', null, (err, response) => {
       if (err) {
-        alert('ERROR: '+err.message)
+        console.log('ERROR: '+err.message)
         return
       }
 

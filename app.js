@@ -23,7 +23,7 @@ mongoose.connect(dbUrl, function(err, res){
   }
 })
 
-
+//Define routes
 var routes = require('./routes/index');
 var api = require('./routes/api');
 var account = require('./routes/account');
@@ -44,7 +44,7 @@ app.use(passport.initialize());
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middlewares/authenticate');
-app.use('/api', authCheckMiddleware);
+//app.use('/api', authCheckMiddleware);
 
 // load passport strategies
 const localSignupStrategy = require('./config/passport/local-signup');
@@ -52,9 +52,10 @@ const localLoginStrategy = require('./config/passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
-
+// Collect static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Manage routes
 app.use('/', routes);
 app.use('/api', api);
 app.use('/account', account);

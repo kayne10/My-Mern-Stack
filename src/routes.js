@@ -1,8 +1,9 @@
+import App from './app.js'
 import Base from './components/Base'
 import HomePage from './components/layout/Home';
 // import DashboardPage from './components/layout/DashboardPage';
 import LoginPage from './components/containers/Login';
-import SignUpPage from './components/containers/SignUp';
+//import SignUpPage from './components/containers/SignUp';
 import Auth from './modules/Auth';
 
 
@@ -45,4 +46,17 @@ import Auth from './modules/Auth';
 //   ]
 // };
 
-export default routes;
+// export default routes;
+
+
+// export default (
+//   <Route path="/" component={App}>
+//     <IndexRoute
+//       getComponent={HomePage}
+//     />
+//     <Route
+//       path="/signup"
+//       getComponent={SignUpPage}
+//     />
+//   </Route>
+// );
