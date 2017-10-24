@@ -64,12 +64,14 @@ module.exports = {
   },
 
   delete: function(id){
-    Zone.findByIdAndRemove(id, function(err){
-      if (err) {
-        callback(err, null)
-        return
-      }
-      callback(null, null)
+    return new Promise(function(resolve, reject){
+      Zone.deleteOne(id, function(err, zone){
+        if(err){
+          reject(err)
+          return
+        }
+        resolve(zone)
+      })
     })
   }
 
